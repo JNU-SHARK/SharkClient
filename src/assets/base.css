@@ -1,0 +1,187 @@
+/* ==================== 科技风格字体定义 - 本地字体 ==================== */
+
+/* Orbitron 字体 - 科幻风格（英文/数字） */
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./fonts/Orbitron-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./fonts/Orbitron-Bold.woff2') format('woff2');
+}
+
+/* Share Tech Mono 字体 - 等宽科技风格（英文/数字） */
+@font-face {
+  font-family: 'Share Tech Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./fonts/ShareTechMono-Regular.woff2') format('woff2');
+}
+
+
+
+:root {
+  --ev-c-white: #ffffff;
+  --ev-c-white-soft: #f8f8f8;
+  --ev-c-white-mute: #f2f2f2;
+
+  --ev-c-black: #1b1b1f;
+  --ev-c-black-soft: #222222;
+  --ev-c-black-mute: #282828;
+
+  --ev-c-gray-1: #515c67;
+  --ev-c-gray-2: #414853;
+  --ev-c-gray-3: #32363f;
+
+  --ev-c-text-1: rgba(255, 255, 245, 0.86);
+  --ev-c-text-2: rgba(235, 235, 245, 0.6);
+  --ev-c-text-3: rgba(235, 235, 245, 0.38);
+
+  --ev-button-alt-border: transparent;
+  --ev-button-alt-text: var(--ev-c-text-1);
+  --ev-button-alt-bg: var(--ev-c-gray-3);
+  --ev-button-alt-hover-border: transparent;
+  --ev-button-alt-hover-text: var(--ev-c-text-1);
+  --ev-button-alt-hover-bg: var(--ev-c-gray-2);
+
+  /* 科技风格字体 - 用于状态栏和HUD */
+  --font-tech: 'Orbitron', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+  --font-tech-display: 'Orbitron', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+  --font-tech-mono: 'Share Tech Mono', 'Noto Sans SC', 'Consolas', monospace;
+  --font-tech-cn: 'Noto Sans SC', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+}
+
+:root {
+  --color-background: var(--ev-c-black);
+  --color-background-soft: var(--ev-c-black-soft);
+  --color-background-mute: var(--ev-c-black-mute);
+
+  --color-text: var(--ev-c-text-1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+ul {
+  list-style: none;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-background);
+  line-height: 1.6;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none; /* 新增: 禁用全局文本选择 */
+}
+
+/* 新增: 允许在输入框中选择文本 */
+input,
+textarea {
+  user-select: auto;
+}
+
+/* ==================== 全局状态徽章样式 ==================== */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  font-family: var(--font-tech);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* 状态徽章前置指示灯 */
+.status-badge-with-dot::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* 激活/成功状态 - 绿色 */
+.status-active,
+.status-success {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+/* 空闲状态 - 灰色 */
+.status-idle {
+  background: rgba(148, 163, 184, 0.15);
+  color: #94a3b8;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+/* 错误状态 - 红色 */
+.status-error {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* 警告状态 - 黄色 */
+.status-warning {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+/* 加载中状态 - 蓝色 + 脉冲动画 */
+.status-loading {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.status-loading.status-badge-with-dot::before {
+  animation: status-pulse 1.5s ease-in-out infinite;
+}
+
+/* 脉冲动画 */
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+}

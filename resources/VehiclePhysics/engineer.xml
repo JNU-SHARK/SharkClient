@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VehiclePhysics id="engineer" name="工程机器人">
+  <!-- 基础属性 -->
+  <Base>
+    <mass>20.0</mass> <!-- kg，中重型 -->
+    <chassisSize width="0.50" height="0.18" length="0.6"/> <!-- m -->
+    <description>工程机器人，负重型配置</description>
+  </Base>
+  
+  <!-- 电机参数 -->
+  <Motor>
+    <power>150</power> <!-- W，高功率应对负载 -->
+    <torque>0.7</torque> <!-- Nm，高扭矩 -->
+    <maxRPM>5500</maxRPM>
+    <powerPercent>55</powerPercent>
+  </Motor>
+  
+  <!-- 悬挂系统 -->
+  <Suspension>
+    <stiffness>28.0</stiffness> <!-- 较硬悬挂 -->
+    <damping>2.8</damping>
+    <compression>5.0</compression>
+    <restLength>0.11</restLength>
+    <maxTravel>0.055</maxTravel>
+  </Suspension>
+  
+  <!-- 轮胎参数 -->
+  <Wheels>
+    <radius>0.07</radius> <!-- m，较大轮子 -->
+    <friction>1100.0</friction> <!-- 高抓地力 -->
+    <rollInfluence>0.09</rollInfluence>
+  </Wheels>
+  
+  <!-- 运动阻尼 -->
+  <Damping>
+    <linear>0.22</linear>
+    <angular>0.55</angular>
+  </Damping>
+  
+  <!-- 控制参数 -->
+  <Control>
+    <turnSensitivity>45</turnSensitivity> <!-- 中等灵敏度 -->
+    <maxSpeed>2.8</maxSpeed> <!-- m/s -->
+  </Control>
+  
+  <!-- 云台限制 -->
+  <Gimbal>
+    <yawMin>-180</yawMin>
+    <yawMax>180</yawMax>
+    <pitchMin>-20</pitchMin> <!-- 较小俯仰角 -->
+    <pitchMax>20</pitchMax>
+    <rollMin>0</rollMin>
+    <rollMax>0</rollMax>
+    <mouseSensitivity>0.0018</mouseSensitivity>
+  </Gimbal>
+</VehiclePhysics>

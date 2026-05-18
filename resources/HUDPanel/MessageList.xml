@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HUDPanel id="message-list-panel">
+  <title>消息列表</title>
+  <description>显示状态效果、经验条和滚动消息</description>
+  
+  <!-- 初始位置配置 - 左侧上方 -->
+  <position>
+    <top>180px</top>
+    <left>20px</left>
+  </position>
+  
+  <!-- 初始大小配置 -->
+  <size>
+    <width>330px</width>
+    <height>570px</height>
+    <minWidth>240px</minWidth>
+    <minHeight>400px</minHeight>
+    <maxWidth>480px</maxWidth>
+    <maxHeight>750px</maxHeight>
+  </size>
+  
+  <!-- 功能配置 -->
+  <options>
+    <resizable>true</resizable>
+    <hideTitleBar>true</hideTitleBar>
+    <transparent>true</transparent>
+    <defaultVisible>true</defaultVisible>
+  </options>
+  
+  <!-- 显示内容配置 -->
+  <content>
+    <component>MessageList</component>
+    <props>
+      <!-- MessageList 组件无需额外 props -->
+    </props>
+  </content>
+</HUDPanel>

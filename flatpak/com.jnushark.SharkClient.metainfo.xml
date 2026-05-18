@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.jnushark.SharkClient</id>
+  <name>SharkClient</name>
+  <summary>RoboMaster client and AI detection dashboard</summary>
+  <metadata_license>MIT</metadata_license>
+  <project_license>Proprietary</project_license>
+  <description>
+    <p>SharkClient provides a RoboMaster dashboard, UDP video display, MQTT communication and an external AI detection service.</p>
+  </description>
+  <launchable type="desktop-id">com.jnushark.SharkClient.desktop</launchable>
+  <provides>
+    <binary>sharkclient</binary>
+  </provides>
+  <releases>
+    <release version="0.1.0" date="2026-05-08"/>
+  </releases>
+</component>

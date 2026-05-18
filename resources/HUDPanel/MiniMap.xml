@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HUDPanel id="mini-map">
+  <title>小地图</title>
+  <description>显示场地俯视图和机器人位置</description>
+
+  <!-- 初始位置配置 - 右下角 -->
+  <position>
+    <bottom>60px</bottom>
+    <right>20px</right>
+  </position>
+
+  <!-- 初始大小配置 - 按照 Map.png 原始比例 (28:15 约 1.867:1) -->
+  <size>
+    <width>420px</width>
+    <height>225px</height>
+    <minWidth>280px</minWidth>
+    <minHeight>150px</minHeight>
+    <maxWidth>560px</maxWidth>
+    <maxHeight>300px</maxHeight>
+  </size>
+
+  <!-- 功能配置 -->
+  <options>
+    <resizable>true</resizable>
+    <defaultTeam>inherit</defaultTeam>
+    <hideTitleBar>true</hideTitleBar>
+    <transparent>true</transparent>
+    <defaultVisible>true</defaultVisible>
+  </options>
+
+  <!-- 显示内容配置 -->
+  <content>
+    <component>MiniMap</component>
+    <props>
+      <mapImageSrc>/Map.png</mapImageSrc>
+      <showGrid>false</showGrid>
+      <showLegend>true</showLegend>
+      <opacity>0.85</opacity>
+    </props>
+  </content>
+</HUDPanel>

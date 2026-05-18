@@ -1,0 +1,18 @@
+syntax = "proto3";
+package template_temp_sensor_002;
+
+// 业务数据结构（用户自定义字段）
+message CustomData {
+  string data_id = 1;          // 固定字段
+  string device_id = 2;        // 固定字段
+  uint64 timestamp = 3;        // 固定字段
+  float temperature = 4;       // 用户自定义字段
+  int16 humidity = 5;          // 用户自定义字段
+  string location = 6;         // 用户自定义字段
+}
+
+// 压缩封装（固定结构）
+message CompressedData {
+  string compression_alg = 1;  // 压缩算法
+  bytes compressed_data = 2;   // 压缩后的CustomData二进制数据
+}

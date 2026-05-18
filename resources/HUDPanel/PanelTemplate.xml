@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HUDPanel id="custom-panel-template">
+  <title>自定义窗口模板</title>
+  <description>这是一个自定义窗口的模板文件，您可以复制并修改此文件来创建新的窗口</description>
+  
+  <!-- 初始位置配置 -->
+  <position>
+    <top>100px</top>
+    <left>100px</left>
+  </position>
+  
+  <!-- 初始大小配置 -->
+  <size>
+    <width>300px</width>
+    <height>200px</height>
+    <minWidth>200px</minWidth>
+    <minHeight>150px</minHeight>
+    <maxWidth>500px</maxWidth>
+    <maxHeight>400px</maxHeight>
+  </size>
+  
+  <!-- 功能配置 -->
+  <options>
+    <resizable>true</resizable>
+    <defaultTeam>inherit</defaultTeam>
+  </options>
+  
+  <!-- 显示内容配置 -->
+  <content>
+    <!-- 
+      component: 指定要渲染的 Vue 组件名称
+      可选值: VehicleAttitude, RobotStateManager, ModuleStatus, MqttCommandPanel 等
+      或者您可以在 Dashboard.vue 中注册新的组件
+    -->
+    <component>ModuleStatus</component>
+    
+    <!-- props: 传递给组件的参数 -->
+    <props>
+      <title>自定义标题</title>
+    </props>
+  </content>
+</HUDPanel>

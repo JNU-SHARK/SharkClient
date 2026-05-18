@@ -1,0 +1,827 @@
+{
+  "nested": {
+    "KeyboardMouseControl": {
+      "fields": {
+        "mouseX": {
+          "type": "int32",
+          "id": 1
+        },
+        "mouseY": {
+          "type": "int32",
+          "id": 2
+        },
+        "mouseZ": {
+          "type": "int32",
+          "id": 3
+        },
+        "leftButtonDown": {
+          "type": "bool",
+          "id": 4
+        },
+        "rightButtonDown": {
+          "type": "bool",
+          "id": 5
+        },
+        "keyboardValue": {
+          "type": "uint32",
+          "id": 6
+        },
+        "midButtonDown": {
+          "type": "bool",
+          "id": 7
+        }
+      }
+    },
+    "CustomControl": {
+      "fields": {
+        "data": {
+          "type": "bytes",
+          "id": 1
+        }
+      }
+    },
+    "MapClickInfo": {
+      "fields": {
+        "targetX": {
+          "type": "float",
+          "id": 1
+        },
+        "targetY": {
+          "type": "float",
+          "id": 2
+        },
+        "targetZ": {
+          "type": "float",
+          "id": 3
+        }
+      }
+    },
+    "MapClickInfoNotify": {
+      "fields": {
+        "isSendAll": {
+          "type": "uint32",
+          "id": 1
+        },
+        "robotId": {
+          "type": "bytes",
+          "id": 2
+        },
+        "mode": {
+          "type": "uint32",
+          "id": 3
+        },
+        "enemyId": {
+          "type": "uint32",
+          "id": 4
+        },
+        "ascii": {
+          "type": "uint32",
+          "id": 5
+        },
+        "type": {
+          "type": "uint32",
+          "id": 6
+        },
+        "mapX": {
+          "type": "float",
+          "id": 7
+        },
+        "mapY": {
+          "type": "float",
+          "id": 8
+        }
+      }
+    },
+    "AssemblyCommand": {
+      "fields": {
+        "operation": {
+          "type": "uint32",
+          "id": 1
+        },
+        "difficulty": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "RobotPerformanceSelectionCommand": {
+      "fields": {
+        "shooter": {
+          "type": "uint32",
+          "id": 1
+        },
+        "chassis": {
+          "type": "uint32",
+          "id": 2
+        },
+        "sentryControl": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CommonCommand": {
+      "fields": {
+        "cmdType": {
+          "type": "uint32",
+          "id": 1
+        },
+        "param": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "HeroDeployModeEventCommand": {
+      "fields": {
+        "mode": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "RuneActivateCommand": {
+      "fields": {
+        "activate": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "DartCommand": {
+      "fields": {
+        "targetId": {
+          "type": "uint32",
+          "id": 1
+        },
+        "open": {
+          "type": "bool",
+          "id": 2
+        },
+        "launchConfirm": {
+          "type": "bool",
+          "id": 3
+        }
+      }
+    },
+    "SentryCtrlCommand": {
+      "fields": {
+        "commandId": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "AirSupportCommand": {
+      "fields": {
+        "commandId": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "GameStatus": {
+      "fields": {
+        "currentRound": {
+          "type": "uint32",
+          "id": 1
+        },
+        "totalRounds": {
+          "type": "uint32",
+          "id": 2
+        },
+        "redScore": {
+          "type": "uint32",
+          "id": 3
+        },
+        "blueScore": {
+          "type": "uint32",
+          "id": 4
+        },
+        "currentStage": {
+          "type": "uint32",
+          "id": 5
+        },
+        "stageCountdownSec": {
+          "type": "int32",
+          "id": 6
+        },
+        "stageElapsedSec": {
+          "type": "int32",
+          "id": 7
+        },
+        "isPaused": {
+          "type": "bool",
+          "id": 8
+        }
+      }
+    },
+    "GlobalUnitStatus": {
+      "fields": {
+        "baseHealth": {
+          "type": "uint32",
+          "id": 1
+        },
+        "baseStatus": {
+          "type": "uint32",
+          "id": 2
+        },
+        "baseShield": {
+          "type": "uint32",
+          "id": 3
+        },
+        "outpostHealth": {
+          "type": "uint32",
+          "id": 4
+        },
+        "outpostStatus": {
+          "type": "uint32",
+          "id": 5
+        },
+        "enemyBaseHealth": {
+          "type": "uint32",
+          "id": 6
+        },
+        "enemyBaseStatus": {
+          "type": "uint32",
+          "id": 7
+        },
+        "enemyBaseShield": {
+          "type": "uint32",
+          "id": 8
+        },
+        "enemyOutpostHealth": {
+          "type": "uint32",
+          "id": 9
+        },
+        "enemyOutpostStatus": {
+          "type": "uint32",
+          "id": 10
+        },
+        "robotHealth": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 11
+        },
+        "robotBullets": {
+          "rule": "repeated",
+          "type": "int32",
+          "id": 12
+        },
+        "totalDamageAlly": {
+          "type": "uint32",
+          "id": 13
+        },
+        "totalDamageEnemy": {
+          "type": "uint32",
+          "id": 14
+        }
+      }
+    },
+    "GlobalLogisticsStatus": {
+      "fields": {
+        "remainingEconomy": {
+          "type": "uint32",
+          "id": 1
+        },
+        "totalEconomyObtained": {
+          "type": "uint64",
+          "id": 2
+        },
+        "techLevel": {
+          "type": "uint32",
+          "id": 3
+        },
+        "encryptionLevel": {
+          "type": "uint32",
+          "id": 4
+        }
+      }
+    },
+    "GlobalSpecialMechanism": {
+      "fields": {
+        "mechanismId": {
+          "rule": "repeated",
+          "type": "uint32",
+          "id": 1
+        },
+        "mechanismTimeSec": {
+          "rule": "repeated",
+          "type": "int32",
+          "id": 2
+        }
+      }
+    },
+    "Event": {
+      "fields": {
+        "eventId": {
+          "type": "int32",
+          "id": 1
+        },
+        "param": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    },
+    "RobotInjuryStat": {
+      "fields": {
+        "totalDamage": {
+          "type": "uint32",
+          "id": 1
+        },
+        "collisionDamage": {
+          "type": "uint32",
+          "id": 2
+        },
+        "smallProjectileDamage": {
+          "type": "uint32",
+          "id": 3
+        },
+        "largeProjectileDamage": {
+          "type": "uint32",
+          "id": 4
+        },
+        "dartSplashDamage": {
+          "type": "uint32",
+          "id": 5
+        },
+        "moduleOfflineDamage": {
+          "type": "uint32",
+          "id": 6
+        },
+        "offlineDamage": {
+          "type": "uint32",
+          "id": 7
+        },
+        "penaltyDamage": {
+          "type": "uint32",
+          "id": 8
+        },
+        "serverKillDamage": {
+          "type": "uint32",
+          "id": 9
+        },
+        "killerId": {
+          "type": "uint32",
+          "id": 10
+        }
+      }
+    },
+    "RobotRespawnStatus": {
+      "fields": {
+        "isPendingRespawn": {
+          "type": "bool",
+          "id": 1
+        },
+        "totalRespawnProgress": {
+          "type": "uint32",
+          "id": 2
+        },
+        "currentRespawnProgress": {
+          "type": "uint32",
+          "id": 3
+        },
+        "canFreeRespawn": {
+          "type": "bool",
+          "id": 4
+        },
+        "goldCostForRespawn": {
+          "type": "uint32",
+          "id": 5
+        },
+        "canPayForRespawn": {
+          "type": "bool",
+          "id": 6
+        }
+      }
+    },
+    "RobotStaticStatus": {
+      "fields": {
+        "connectionState": {
+          "type": "uint32",
+          "id": 1
+        },
+        "fieldState": {
+          "type": "uint32",
+          "id": 2
+        },
+        "aliveState": {
+          "type": "uint32",
+          "id": 3
+        },
+        "robotId": {
+          "type": "uint32",
+          "id": 4
+        },
+        "robotType": {
+          "type": "uint32",
+          "id": 5
+        },
+        "performanceSystemShooter": {
+          "type": "uint32",
+          "id": 6
+        },
+        "performanceSystemChassis": {
+          "type": "uint32",
+          "id": 7
+        },
+        "level": {
+          "type": "uint32",
+          "id": 8
+        },
+        "maxHealth": {
+          "type": "uint32",
+          "id": 9
+        },
+        "maxHeat": {
+          "type": "uint32",
+          "id": 10
+        },
+        "heatCooldownRate": {
+          "type": "float",
+          "id": 11
+        },
+        "maxPower": {
+          "type": "uint32",
+          "id": 12
+        },
+        "maxBufferEnergy": {
+          "type": "uint32",
+          "id": 13
+        },
+        "maxChassisEnergy": {
+          "type": "uint32",
+          "id": 14
+        }
+      }
+    },
+    "RobotDynamicStatus": {
+      "fields": {
+        "currentHealth": {
+          "type": "uint32",
+          "id": 1
+        },
+        "currentHeat": {
+          "type": "float",
+          "id": 2
+        },
+        "lastProjectileFireRate": {
+          "type": "float",
+          "id": 3
+        },
+        "currentChassisEnergy": {
+          "type": "uint32",
+          "id": 4
+        },
+        "currentBufferEnergy": {
+          "type": "uint32",
+          "id": 5
+        },
+        "currentExperience": {
+          "type": "uint32",
+          "id": 6
+        },
+        "experienceForUpgrade": {
+          "type": "uint32",
+          "id": 7
+        },
+        "totalProjectilesFired": {
+          "type": "uint32",
+          "id": 8
+        },
+        "remainingAmmo": {
+          "type": "uint32",
+          "id": 9
+        },
+        "isOutOfCombat": {
+          "type": "bool",
+          "id": 10
+        },
+        "outOfCombatCountdown": {
+          "type": "uint32",
+          "id": 11
+        },
+        "canRemoteHeal": {
+          "type": "bool",
+          "id": 12
+        },
+        "canRemoteAmmo": {
+          "type": "bool",
+          "id": 13
+        }
+      }
+    },
+    "RobotModuleStatus": {
+      "fields": {
+        "powerManager": {
+          "type": "uint32",
+          "id": 1
+        },
+        "rfid": {
+          "type": "uint32",
+          "id": 2
+        },
+        "lightStrip": {
+          "type": "uint32",
+          "id": 3
+        },
+        "smallShooter": {
+          "type": "uint32",
+          "id": 4
+        },
+        "bigShooter": {
+          "type": "uint32",
+          "id": 5
+        },
+        "uwb": {
+          "type": "uint32",
+          "id": 6
+        },
+        "armor": {
+          "type": "uint32",
+          "id": 7
+        },
+        "videoTransmission": {
+          "type": "uint32",
+          "id": 8
+        },
+        "capacitor": {
+          "type": "uint32",
+          "id": 9
+        },
+        "mainController": {
+          "type": "uint32",
+          "id": 10
+        },
+        "laserDetectionModule": {
+          "type": "uint32",
+          "id": 11
+        }
+      }
+    },
+    "RobotPosition": {
+      "fields": {
+        "x": {
+          "type": "float",
+          "id": 1
+        },
+        "y": {
+          "type": "float",
+          "id": 2
+        },
+        "z": {
+          "type": "float",
+          "id": 3
+        },
+        "yaw": {
+          "type": "float",
+          "id": 4
+        },
+        "robotId": {
+          "type": "uint32",
+          "id": 5
+        }
+      }
+    },
+    "Buff": {
+      "fields": {
+        "robotId": {
+          "type": "uint32",
+          "id": 1
+        },
+        "buffType": {
+          "type": "uint32",
+          "id": 2
+        },
+        "buffLevel": {
+          "type": "int32",
+          "id": 3
+        },
+        "buffMaxTime": {
+          "type": "uint32",
+          "id": 4
+        },
+        "buffLeftTime": {
+          "type": "uint32",
+          "id": 5
+        }
+      }
+    },
+    "PenaltyInfo": {
+      "fields": {
+        "penaltyType": {
+          "type": "uint32",
+          "id": 1
+        },
+        "penaltyEffectSec": {
+          "type": "uint32",
+          "id": 2
+        },
+        "totalPenaltyNum": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "RobotPathPlanInfo": {
+      "fields": {
+        "intention": {
+          "type": "uint32",
+          "id": 1
+        },
+        "startPosX": {
+          "type": "uint32",
+          "id": 2
+        },
+        "startPosY": {
+          "type": "uint32",
+          "id": 3
+        },
+        "offsetX": {
+          "rule": "repeated",
+          "type": "int32",
+          "id": 4
+        },
+        "offsetY": {
+          "rule": "repeated",
+          "type": "int32",
+          "id": 5
+        },
+        "senderId": {
+          "type": "uint32",
+          "id": 6
+        }
+      }
+    },
+    "RadarInfoToClient": {
+      "fields": {
+        "RadarSingleRobotInfo": {
+          "rule": "repeated",
+          "type": "RadarSingleRobotInfo",
+          "id": 1
+        }
+      }
+    },
+    "RadarSingleRobotInfo": {
+      "fields": {
+        "targetPosX": {
+          "type": "uint32",
+          "id": 1
+        },
+        "targetPosY": {
+          "type": "uint32",
+          "id": 2
+        },
+        "isHighLight": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "CustomByteBlock": {
+      "fields": {
+        "data": {
+          "type": "bytes",
+          "id": 1
+        }
+      }
+    },
+    "TechCoreMotionStateSync": {
+      "fields": {
+        "maximumDifficultyLevel": {
+          "type": "uint32",
+          "id": 1
+        },
+        "basicState": {
+          "type": "uint32",
+          "id": 2
+        },
+        "putinState": {
+          "type": "uint32",
+          "id": 3
+        },
+        "moveState": {
+          "type": "uint32",
+          "id": 4
+        },
+        "rotateState": {
+          "type": "uint32",
+          "id": 5
+        },
+        "enemyCoreStatus": {
+          "type": "uint32",
+          "id": 6
+        },
+        "remainTimeAll": {
+          "type": "uint32",
+          "id": 7
+        },
+        "remainTimeStep": {
+          "type": "uint32",
+          "id": 8
+        }
+      }
+    },
+    "RobotPerformanceSelectionSync": {
+      "fields": {
+        "shooter": {
+          "type": "uint32",
+          "id": 1
+        },
+        "chassis": {
+          "type": "uint32",
+          "id": 2
+        },
+        "sentryControl": {
+          "type": "uint32",
+          "id": 3
+        }
+      }
+    },
+    "DeployModeStatusSync": {
+      "fields": {
+        "status": {
+          "type": "uint32",
+          "id": 1
+        }
+      }
+    },
+    "RuneStatusSync": {
+      "fields": {
+        "runeStatus": {
+          "type": "uint32",
+          "id": 1
+        },
+        "activatedArms": {
+          "type": "uint32",
+          "id": 2
+        },
+        "averageRings": {
+          "type": "float",
+          "id": 3
+        }
+      }
+    },
+    "SentryStatusSync": {
+      "fields": {
+        "postureId": {
+          "type": "uint32",
+          "id": 1
+        },
+        "isWeakened": {
+          "type": "bool",
+          "id": 2
+        }
+      }
+    },
+    "DartSelectTargetStatusSync": {
+      "fields": {
+        "targetId": {
+          "type": "uint32",
+          "id": 1
+        },
+        "open": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "SentryCtrlResult": {
+      "fields": {
+        "commandId": {
+          "type": "uint32",
+          "id": 1
+        },
+        "resultCode": {
+          "type": "uint32",
+          "id": 2
+        }
+      }
+    },
+    "AirSupportStatusSync": {
+      "fields": {
+        "airsupportStatus": {
+          "type": "uint32",
+          "id": 1
+        },
+        "leftTime": {
+          "type": "uint32",
+          "id": 2
+        },
+        "costCoins": {
+          "type": "uint32",
+          "id": 3
+        },
+        "isBeingTargeted": {
+          "type": "uint32",
+          "id": 4
+        },
+        "shooterStatus": {
+          "type": "uint32",
+          "id": 5
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proto_config>
+    <!-- 数据类型枚举配置 -->
+    <data_types>
+        <data_type key="FLAG" value="0" name="标志位" description="布尔类型（true/false）"/>
+        <data_type key="UINT" value="1" name="无符号整数" description="无符号整数（0~2^64-1）"/>
+        <data_type key="INT8" value="2" name="有符号8位整数" description="有符号8位整数（-128~127）"/>
+        <data_type key="INT16" value="3" name="有符号16位整数" description="有符号16位整数（-32768~32767）"/>
+        <data_type key="INT32" value="4" name="有符号32位整数" description="有符号32位整数（-2147483648~2147483647）"/>
+        <data_type key="STRING" value="5" name="字符串" description="UTF-8编码字符串"/>
+        <data_type key="FLOAT" value="6" name="浮点型" description="32位浮点型数据"/>
+        <data_type key="BYTES" value="7" name="字节流" description="二进制字节流（如视频数据）"/>
+    </data_types>
+
+    <!-- 压缩算法配置 -->
+    <compression_algs>
+        <compression_alg key="lz4" name="LZ4压缩" description="高速压缩算法，适合实时数据"/>
+        <compression_alg key="zstd" name="Zstd压缩" description="高压缩比算法，平衡速度与压缩率"/>
+        <compression_alg key="none" name="无压缩" description="不使用压缩"/>
+    </compression_algs>
+
+    <!-- 核心数据结构字段配置 -->
+    <custom_data_fields>
+        <field name="data_id" type="string" required="true" label="数据ID" description="数据唯一标识"/>
+        <field name="data_name" type="string" required="true" label="数据名称" description="数据名称（便于识别）"/>
+        <field name="data_desc" type="string" required="false" label="数据描述" description="本地描述信息（仅客户端存储）"/>
+        <field name="data_type" type="enum" enum_ref="data_types" required="true" label="数据类型" description="数据类型枚举"/>
+        <field name="send_freq" type="float" required="true" label="发送频率" description="发送频率（Hz，≤75）"/>
+        <field name="timestamp" type="uint64" required="true" label="时间戳" description="数据生成时间戳（毫秒）"/>
+        <field name="device_id" type="string" required="true" label="设备ID" description="设备唯一标识"/>
+        <field name="fragment" type="fragment_info" required="false" label="分片信息" description="字节流分片信息（仅BYTES类型使用）"/>
+    </custom_data_fields>
+
+    <!-- 数据值类型映射配置（关联data_type与具体值字段） -->
+    <data_value_mappings>
+        <mapping data_type="FLAG" value_field="flag_value" field_type="bool" label="标志位值"/>
+        <mapping data_type="UINT" value_field="uint_value" field_type="uint64" label="无符号整数值"/>
+        <mapping data_type="INT8" value_field="int8_value" field_type="sint32" label="有符号8位整数值"/>
+        <mapping data_type="INT16" value_field="int16_value" field_type="sint32" label="有符号16位整数值"/>
+        <mapping data_type="INT32" value_field="int32_value" field_type="sint32" label="有符号32位整数值"/>
+        <mapping data_type="STRING" value_field="string_value" field_type="string" label="字符串值"/>
+        <mapping data_type="FLOAT" value_field="float_value" field_type="float" label="浮点数值"/>
+        <mapping data_type="BYTES" value_field="bytes_value" field_type="bytes" label="字节流数据"/>
+    </data_value_mappings>
+
+    <!-- 分片信息字段配置 -->
+    <fragment_info_fields>
+        <field name="fragment_idx" type="uint32" required="true" label="分片序号" description="分片序号（从1开始）"/>
+        <field name="total_fragments" type="uint32" required="true" label="总分片数" description="字节流总分片数量"/>
+    </fragment_info_fields>
+
+    <!-- 压缩数据包字段配置 -->
+    <compressed_data_fields>
+        <field name="compression_alg" type="enum" enum_ref="compression_algs" required="true" label="压缩算法" description="使用的压缩算法类型"/>
+        <field name="compressed_data" type="bytes" required="true" label="压缩数据" description="压缩后的CustomData二进制数据"/>
+    </compressed_data_fields>
+</proto_config>

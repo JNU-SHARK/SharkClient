@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        /* 可选: 为 LOGO 添加一点阴影效果 */
+        filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.4));
+      }
+      .permission-hint {
+        position: absolute;
+        bottom: 30px;
+        color: #888;
+        font-size: 14px;
+        font-family: sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 相对路径引用 LOGO 文件 -->
+    <img src="./SHARK_pre.png" alt="Loading..." />
+    <div class="permission-hint">正在初始化摄像头权限...</div>
+
+    <script>
+      // 在闪屏阶段预请求摄像头权限
+      ;(async () => {
+        try {
+          console.log('[Splash] 预请求摄像头权限...')
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: false
+          })
+          console.log('[Splash] 摄像头权限已授予')
+          // 立即停止流，只是为了获取权限
+          stream.getTracks().forEach((track) => track.stop())
+          document.querySelector('.permission-hint').textContent = '初始化完成'
+        } catch (error) {
+          console.warn('[Splash] 摄像头权限请求失败:', error)
+          document.querySelector('.permission-hint').textContent =
+            '摄像头权限未授权（可稍后在应用中授权）'
+        }
+      })()
+    </script>
+  </body>
+</html>

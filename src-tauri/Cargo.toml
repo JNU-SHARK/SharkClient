@@ -1,0 +1,60 @@
+[package]
+name = "shark-client-rust-version"
+version = "1.0.0"
+description = "SharkClientRustVersion"
+authors = ["JNU-Shark"]
+edition = "2021"
+
+[[bin]]
+name = "SharkClientRustVersion"
+path = "src/main.rs"
+
+[lib]
+# The `_lib` suffix is required on Windows so the library name stays unique
+# and does not conflict with the binary name.
+name = "shark_client_rust_version_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[features]
+default = []
+# Kept for packaging compatibility. AI detection now runs in an external
+# Python process, so this feature no longer embeds ONNX weights.
+lite = []
+# Embedded FFmpeg static libraries. Build the static libs with
+# scripts/build-ffmpeg-minimal.ps1 / .sh before enabling this feature.
+internal-ffmpeg = []
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+cc = "1"
+
+[dependencies]
+tauri = { version = "2", features = ["devtools"] }
+tauri-plugin-opener = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_yaml = "0.9.34"
+tokio = { version = "1.51.0", features = ["process", "rt", "rt-multi-thread", "macros", "sync", "net"] }
+sysinfo = "0.38.4"
+tauri-plugin-dialog = "2.7.0"
+rumqttc = "0.25.1"
+socket2 = "0.5"
+image = { version = "0.25", default-features = false, features = ["jpeg", "png"] }
+base64 = "0.22"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = true
+opt-level = "z"
+strip = true
+
+# Keep our dev code mildly optimized so hot video paths are usable. Third-party
+# crates such as `image` dominate encode cost, so they remain at opt-level=3.
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
