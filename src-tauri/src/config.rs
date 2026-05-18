@@ -464,7 +464,12 @@ pub async fn hud_update_template_title(
     let updated = if let Some(start) = content.find("<title>") {
         if let Some(end_offset) = content[start + 7..].find("</title>") {
             let end = start + 7 + end_offset;
-            format!("{}{}{}", &content[..start + 7], escaped_title, &content[end..])
+            format!(
+                "{}{}{}",
+                &content[..start + 7],
+                escaped_title,
+                &content[end..]
+            )
         } else {
             return Err("Malformed HUD template title tag".to_string());
         }

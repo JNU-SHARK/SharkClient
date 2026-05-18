@@ -106,7 +106,13 @@ use tauri::Listener;
 use tauri::Manager;
 
 fn create_main_window(app: &mut tauri::App) -> tauri::Result<tauri::WebviewWindow> {
-    let config = app.config().app.windows.first().cloned().unwrap_or_default();
+    let config = app
+        .config()
+        .app
+        .windows
+        .first()
+        .cloned()
+        .unwrap_or_default();
     tauri::WebviewWindowBuilder::from_config(app, &config)?
         .data_directory(config::get_webview_data_dir())
         .build()

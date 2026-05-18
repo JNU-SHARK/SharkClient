@@ -885,8 +885,18 @@ fn jpeg_dimensions(data: &[u8]) -> Option<(u32, u32)> {
 
         let is_sof = matches!(
             marker,
-            0xC0 | 0xC1 | 0xC2 | 0xC3 | 0xC5 | 0xC6 | 0xC7 | 0xC9 | 0xCA | 0xCB | 0xCD
-                | 0xCE | 0xCF
+            0xC0 | 0xC1
+                | 0xC2
+                | 0xC3
+                | 0xC5
+                | 0xC6
+                | 0xC7
+                | 0xC9
+                | 0xCA
+                | 0xCB
+                | 0xCD
+                | 0xCE
+                | 0xCF
         );
         if is_sof && segment_len >= 7 {
             let height = u16::from_be_bytes([data[idx + 3], data[idx + 4]]) as u32;
