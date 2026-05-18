@@ -1,0 +1,251 @@
+@import './base.css';
+
+:root {
+  --color-background: #111827;
+  --color-background-soft: #1f2937;
+  --color-background-mute: #374151;
+
+  --color-border: rgba(128, 128, 128, 0.25);
+  --color-border-hover: rgba(128, 128, 128, 0.5);
+
+  --color-heading: #e5e7eb;
+  --color-text: #d1d5db;
+
+  --success-color: #4ade80;
+  --warning-color: #f59e0b;
+  --danger-color: #f43f5e;
+}
+
+/* semantic color variables for this project */
+:root {
+  --color-accent: #3b82f6;
+  --color-accent-hover: #2563eb;
+  --color-accent-active: #1d4ed8;
+
+  --color-muted: #6b7280;
+  --color-muted-hover: #4b5563;
+  --color-muted-active: #374151;
+
+  --color-border-muted: rgba(107, 114, 128, 0.5);
+  --color-border-accent: rgba(59, 130, 246, 0.5);
+}
+
+/* --- New: Custom Scrollbar Styles --- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* --- Custom Select/Dropdown Styles --- */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: rgba(255, 255, 255, 0.05);
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="%23ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: var(--color-text);
+  padding: 10px 36px 10px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+select:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+select:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+select:active {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Firefox specific - 隐藏默认箭头 */
+select::-ms-expand {
+  display: none;
+}
+
+/* Option 样式 */
+select option {
+  background-color: var(--color-background-soft);
+  color: var(--color-text);
+  padding: 10px;
+}
+
+select option:hover,
+select option:focus {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+/* 禁用状态 */
+select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Path input group and browse button - global so child components match Dashboard */
+.path-input-group {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.path-input {
+  flex: 1;
+  padding: 10px 14px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 13px;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s;
+}
+.path-input:focus {
+  outline: none;
+  border-color: rgba(59, 130, 246, 0.5);
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+.browse-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  background-color: #3b82f6;
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+.browse-btn:hover {
+  background-color: #2563eb;
+}
+
+/* codec-select option: allow custom background & padding used in dashboard */
+.codec-select option {
+  background-color: #1a1a2e;
+  color: #fff;
+  padding: 8px;
+}
+
+.browse-btn:active {
+  transform: scale(0.98);
+}
+
+/* codec-select global: fixed width used across UIs */
+.codec-select {
+  width: 120px;
+}
+
+/* Camera select: make it fill available space in a path-input-group or flex row */
+.camera-select {
+  box-sizing: border-box;
+  width: 100%;
+  display: block;
+}
+
+/* ensure inputs properly shrink in flex containers */
+.path-input,
+.camera-select,
+.udp-host {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* UDP host/port (consistent with path input & codec select) */
+.udp-host {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  flex: 1;
+}
+.udp-port {
+  width: 120px;
+  min-width: 100px;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-text);
+  background: #000;
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  line-height: 1.6;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Detection toggle button (small inline button near status badge) */
+.detection-toggle-button {
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--color-text);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 6px;
+}
+
+.detection-toggle-button[aria-pressed='true'] {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.detection-toggle-button:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
