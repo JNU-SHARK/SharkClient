@@ -1,0 +1,174 @@
+syntax = "proto3";
+package receive_data;
+
+// 自动生成的接收数据块定义（用于解析 CustomByteBlock）
+// 此文件由客户端自动生成，请勿手动编辑
+// 优化策略：FLAG/INT8/INT16 自动拼合到 int32 块中以节省空间
+
+message CustomDataBlock {
+  // 数据块 1
+  sint32 field_1 = 1;
+
+  // 数据块 2
+  sint32 field_2 = 2;
+
+  // 数据块 3
+  sint32 field_3 = 3;
+
+  // 数据块 4
+  sint32 field_4 = 4;
+
+  // 数据块 5
+  sint32 field_5 = 5;
+
+  // 数据块 6
+  float field_6 = 6;
+
+  // 数据块 7
+  sint32 field_7 = 7;
+
+  // 数据块 8
+  sint32 field_8 = 8;
+
+  // 数据块 9
+  sint32 field_9 = 9;
+
+  // 数据块 10
+  sint32 field_10 = 10;
+
+  // 数据块 11
+  sint32 field_11 = 11;
+
+  // 数据块 12
+  sint32 field_12 = 12;
+
+  // 数据块 13
+  sint32 field_13 = 13;
+
+  // 数据块 14
+  bytes field_14 = 14;
+
+  // 数据块 15
+  sint32 field_15 = 15;
+
+  // 数据块 16
+  sint32 field_16 = 16;
+
+  // 数据块 17
+  sint32 field_17 = 17;
+
+  // 数据块 18
+  sint32 field_18 = 18;
+
+  // 数据块 19
+  sint32 field_19 = 19;
+
+  // 数据块 20
+  sint32 field_20 = 20;
+
+  // 数据块 21
+  sint32 field_21 = 21;
+
+  // 数据块 22
+  sint32 field_22 = 22;
+
+  // 数据块 23
+  sint32 field_23 = 23;
+
+  // 数据块 24
+  sint32 field_24 = 24;
+
+  // 数据块 25
+  sint32 field_25 = 25;
+
+  // 数据块 26
+  sint32 field_26 = 26;
+
+  // 数据块 27
+  sint32 field_27 = 27;
+
+  // 数据块 28
+  sint32 field_28 = 28;
+
+  // 数据块 29
+  sint32 field_29 = 29;
+
+  // 数据块 30
+  sint32 field_30 = 30;
+
+  // 数据块 31
+  sint32 field_31 = 31;
+
+  // 数据块 32
+  sint32 field_32 = 32;
+
+  // 数据块 33
+  sint32 field_33 = 33;
+
+  // 数据块 34
+  sint32 field_34 = 34;
+
+  // 数据块 35
+  sint32 field_35 = 35;
+
+  // 数据块 36
+  sint32 field_36 = 36;
+
+  // 数据块 37
+  sint32 field_37 = 37;
+
+  // 数据块 38
+  sint32 field_38 = 38;
+
+  // 数据块 39
+  sint32 field_39 = 39;
+
+  // 数据块 40
+  sint32 field_40 = 40;
+
+  // 数据块 41
+  sint32 field_41 = 41;
+
+  // 数据块 42
+  sint32 field_42 = 42;
+
+  // 数据块 43
+  sint32 field_43 = 43;
+
+  // 数据块 44
+  sint32 field_44 = 44;
+
+  // 数据块 45
+  sint32 field_45 = 45;
+
+  // 数据块 46
+  sint32 field_46 = 46;
+
+  // 数据块 47
+  sint32 field_47 = 47;
+
+  // 数据块 48
+  sint32 field_48 = 48;
+
+  // 数据块 49
+  sint32 field_49 = 49;
+
+  // 数据块 50
+  sint32 field_50 = 50;
+
+  // 数据块 51
+  sint32 field_51 = 51;
+
+  // 数据块 52
+  sint32 field_52 = 52;
+
+  // 数据块 53
+  sint32 field_53 = 53;
+
+  // 数据块 54
+  sint32 field_54 = 54;
+
+  // 数据块 55
+  sint32 field_55 = 55;
+
+}

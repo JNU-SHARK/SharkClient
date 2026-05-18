@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FixedGraphic>
+  <Element type="line" color="#00ff00" lineWidth="2">
+    <Points>[{"x":640,"y":350},{"x":640,"y":370}]</Points>
+  </Element>
+  <Element type="line" color="#00ff00" lineWidth="2">
+    <Points>[{"x":630,"y":360},{"x":650,"y":360}]</Points>
+  </Element>
+  <Element type="circle" color="#00ff00" lineWidth="1">
+    <Circle>{"x":640,"y":360,"r":5}</Circle>
+  </Element>
+</FixedGraphic>

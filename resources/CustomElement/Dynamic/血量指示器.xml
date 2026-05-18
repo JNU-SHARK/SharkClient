@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FixedGraphic>
+  <Element type="rect" color="#ff0000" lineWidth="3">
+    <Rect>{"x":50,"y":50,"w":200,"h":30}</Rect>
+  </Element>
+  <Element type="text" color="#ffffff" lineWidth="1">
+    <Text>{"x":60,"y":70,"content":"HP: 100%","size":16,"isBold":true}</Text>
+  </Element>
+</FixedGraphic>

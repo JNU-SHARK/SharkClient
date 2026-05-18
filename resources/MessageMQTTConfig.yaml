@@ -1,0 +1,229 @@
+# ============================================================
+# 消息通知 MQTT 配置
+# ============================================================
+# 定义哪些 MQTT 数据变化需要弹出消息通知窗口
+#
+# 消息级别 (level):
+#   - info: 通知类消息 (浅绿色)
+#   - warning: 警告类消息 (黄色) - 黄牌等
+#   - danger: 危险类消息 (红色) - 死亡、罚下等
+#
+# 触发条件 (trigger):
+#   - changed: 值变化时触发
+#   - equals: 值等于指定值时触发
+#   - greater: 值大于指定值时触发
+#   - less: 值小于指定值时触发
+#   - not_equals: 值不等于指定值时触发
+#
+# 特殊类型 (specialType):
+#   - gameStage: 普通比赛阶段消息
+#   - gameStageCountdown: 带倒计时的消息（准备阶段、5秒倒计时）
+#   - gameStageElapsed: 带已过时间和进度条的消息（自检阶段）
+#   - gameStageProgress: 旧版进度条消息（兼容）
+# ============================================================
+
+messages:
+  # ==================== 比赛阶段通知 ====================
+  # 注意：比赛中阶段(FIGHTING)不显示弹窗，通过顶部状态栏显示倒计时
+
+  # 未开始状态
+  - id: game_stage_not_started
+    mqttPath: 'gameStatus.currentStage'
+    trigger: equals
+    triggerValue: 0
+    level: info
+    title: '比赛状态'
+    messageTemplate: '等待比赛开始'
+    duration: -1
+    specialType: 'gameStage'
+
+  # 准备阶段 - 显示倒计时，本地倒计时并同步服务器
+  # 暂停时标题变为"技术暂停"
+  - id: game_stage_prepare
+    mqttPath: 'gameStatus.currentStage'
+    trigger: equals
+    triggerValue: 1
+    level: info
+    title: '准备阶段'
+    messageTemplate: '{countdown}'
+    subText: '准备阶段倒计时'
+    duration: -1
+    specialType: 'gameStageCountdown'
+    countdownPath: 'gameStatus.stageCountdownSec'
+
+  # 自检阶段 - 显示已过时间和进度条
+  # 超过5秒未同步时进度条闪烁
+  # 暂停时标题变为"暂停：裁判系统正在发力"
+  - id: game_stage_selfcheck
+    mqttPath: 'gameStatus.currentStage'
+    trigger: equals
+    triggerValue: 2
+    level: info
+    title: '系统自检'
+    messageTemplate: '系统自检中，请等待'
+    subText: '系统自检中，请等待'
+    duration: -1
+    specialType: 'gameStageElapsed'
+    progressPath: 'gameStatus.stageElapsedSec'
+    totalTime: 15
+
+  # 5秒倒计时阶段 - 自行倒计时5秒
+  # 5秒后如果未进入比赛中，显示"比赛即将开始"
+  - id: game_stage_countdown_5s
+    mqttPath: 'gameStatus.currentStage'
+    trigger: equals
+    triggerValue: 3
+    level: warning
+    title: '5秒倒计时'
+    messageTemplate: '{countdown}'
+    subText: '比赛即将开始！'
+    duration: -1
+    specialType: 'gameStageCountdown'
+    countdownPath: 'gameStatus.stageCountdownSec'
+
+  # 结算阶段
+  - id: game_stage_settlement
+    mqttPath: 'gameStatus.currentStage'
+    trigger: equals
+    triggerValue: 5
+    level: info
+    title: '比赛结束'
+    messageTemplate: '比赛结束，正在结算中...'
+    duration: -1
+    specialType: 'gameStage'
+
+  # 暂停状态（仅用于准备阶段的技术暂停，其他阶段在消息中处理）
+  - id: game_stage_pause
+    mqttPath: 'gameStatus.isPaused'
+    trigger: equals
+    triggerValue: true
+    level: warning
+    title: '技术暂停'
+    messageTemplate: '{countdown}'
+    subText: '暂停中，请等待'
+    duration: -1
+    specialType: 'gameStageCountdown'
+    countdownPath: 'gameStatus.stageCountdownSec'
+
+  # ==================== 罚下/判罚通知 ====================
+  - id: penalty_yellow_card
+    mqttPath: 'penaltyInfo.penaltyType'
+    trigger: equals
+    triggerValue: 1
+    level: warning
+    title: '黄牌警告'
+    messageTemplate: '本车收到黄牌警告！'
+    duration: 5000
+
+  - id: penalty_double_yellow
+    mqttPath: 'penaltyInfo.penaltyType'
+    trigger: equals
+    triggerValue: 2
+    level: danger
+    title: '双黄牌罚下'
+    messageTemplate: '本车双黄牌罚下！'
+    duration: 8000
+
+  - id: penalty_red_card
+    mqttPath: 'penaltyInfo.penaltyType'
+    trigger: equals
+    triggerValue: 3
+    level: danger
+    title: '红牌罚下'
+    messageTemplate: '本车红牌罚下！'
+    duration: 8000
+
+  - id: penalty_over_power
+    mqttPath: 'penaltyInfo.penaltyType'
+    trigger: equals
+    triggerValue: 4
+    level: warning
+    title: '功率超限'
+    messageTemplate: '功率超限警告！'
+    duration: 3000
+
+  - id: penalty_over_heat
+    mqttPath: 'penaltyInfo.penaltyType'
+    trigger: equals
+    triggerValue: 5
+    level: warning
+    title: '枪口过热'
+    messageTemplate: '枪口热量超限！'
+    duration: 3000
+
+  - id: penalty_over_fire_rate
+    mqttPath: 'penaltyInfo.penaltyType'
+    trigger: equals
+    triggerValue: 6
+    level: warning
+    title: '射速超限'
+    messageTemplate: '射速超限警告！'
+    duration: 3000
+
+  # ==================== 死亡通知 ====================
+  # 注意: 阵亡状态由复活面板(RespawnPanel)处理，不再使用普通消息弹窗
+  # - id: robot_death (已移除，使用 MessageWindow 中的复活面板)
+
+  - id: robot_revive
+    mqttPath: 'currentRobot.isAlive'
+    trigger: equals
+    triggerValue: true
+    previousValue: false
+    level: info
+    title: '机器人复活'
+    messageTemplate: '本车已复活！'
+    duration: 3000
+
+  # ==================== 基地/前哨站状态 ====================
+  - id: outpost_destroyed
+    mqttPath: 'globalUnitStatus.outpostStatus'
+    trigger: equals
+    triggerValue: 2 # DESTROYED
+    level: danger
+    title: '前哨站被摧毁'
+    messageTemplate: '我方前哨站已被摧毁！'
+    duration: 5000
+
+  - id: base_under_attack
+    mqttPath: 'globalUnitStatus.baseStatus'
+    trigger: equals
+    triggerValue: 1 # VULNERABLE
+    level: warning
+    title: '基地易伤'
+    messageTemplate: '我方基地进入易伤状态！'
+    duration: 5000
+
+  # ==================== 经济系统通知 ====================
+  - id: economy_low
+    mqttPath: 'logisticsStatus.remainingEconomy'
+    trigger: less
+    triggerValue: 100
+    level: warning
+    title: '经济不足'
+    messageTemplate: '剩余经济不足100！'
+    duration: 3000
+    cooldown: 30000
+
+  # ==================== 增益效果通知 ====================
+  - id: buff_obtained
+    mqttPath: 'currentRobot.buffInfo'
+    trigger: changed
+    level: info
+    title: '获得增益'
+    messageTemplate: '获得增益效果！'
+    duration: 2000
+
+# ============================================================
+# 消息显示配置
+# ============================================================
+display:
+  # 最大同时显示消息数
+  maxMessages: 5
+  # 消息间距 (px)
+  messageGap: 8
+  # 消息从顶部的起始位置 (px)
+  topOffset: 120
+  # 消息宽度 (px)
+  messageWidth: 360
+  # 动画持续时间 (ms)
+  animationDuration: 300

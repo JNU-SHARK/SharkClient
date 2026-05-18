@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package custom_data;
+
+// 图片块协议消息定义 (128字节)
+message ImageBlock {
+    fixed32 cmd_type = 1;         // 命令类型 (1B)
+    fixed32 img_id = 2;           // 图片ID (2B)
+    fixed32 block_idx = 3;        // 当前块索引 (2B)
+    fixed32 total_block = 4;      // 总块数 (2B)
+    fixed32 data_len = 5;         // 有效数据长度 (1B)
+    bytes data = 6;               // 数据块 (120B)
+}
+
+message CustomByteBlock {
+    // 英雄自定义数据
+    float gimbal_pitch = 1;     // 云台俯仰角
+    float gimbal_yaw = 2;       // 云台偏航角
+    bool friction_wheel_on = 3; // 摩擦轮开启
+    int32 level = 4;            // 等级
+    
+    ImageBlock Image = 5;       // 图片块协议 (可选)
+    bytes _padding = 6;         // 填充
+}

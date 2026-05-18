@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DashboardConfig>
+  <name>test1</name>
+  <version>1.0</version>
+  <createdAt>2025-12-05T12:09:28.902Z</createdAt>
+  <modifiedAt>2025-12-05T12:09:28.902Z</modifiedAt>
+  
+  <panels>
+    <panel id="message-list-panel">
+      <title>消息列表</title>
+      <visible>true</visible>
+      <position>
+        <top>180px</top>
+        <left>20px</left>
+      </position>
+      <size>
+        <width>330px</width>
+        <height>570px</height>
+      </size>
+      <options>
+        <hideTitleBar>true</hideTitleBar>
+        <transparent>true</transparent>
+        <opacity>1</opacity>
+      </options>
+    </panel>
+    <panel id="mini-map">
+      <title>小地图</title>
+      <visible>true</visible>
+      <position>
+        <right>20px</right>
+        <bottom>60px</bottom>
+      </position>
+      <size>
+        <width>420px</width>
+        <height>225px</height>
+      </size>
+      <options>
+        <hideTitleBar>true</hideTitleBar>
+        <transparent>true</transparent>
+        <opacity>1</opacity>
+      </options>
+    </panel>
+    <panel id="module-status">
+      <title>模块状态</title>
+      <visible>false</visible>
+      <position>
+        <left>228px</left>
+        <bottom>26px</bottom>
+      </position>
+      <size>
+        <width>320px</width>
+        <height>auto</height>
+      </size>
+      <options>
+        <hideTitleBar>false</hideTitleBar>
+        <transparent>false</transparent>
+        <opacity>1</opacity>
+      </options>
+    </panel>
+    <panel id="pitch-indicator">
+      <title>俯仰角指示器</title>
+      <visible>true</visible>
+      <position>
+        <top>calc(50% - 180px)</top>
+        <right>20px</right>
+      </position>
+      <size>
+        <width>180px</width>
+        <height>360px</height>
+      </size>
+      <options>
+        <hideTitleBar>true</hideTitleBar>
+        <transparent>true</transparent>
+        <opacity>1</opacity>
+      </options>
+    </panel>
+    <panel id="robot-status">
+      <title>本车状态</title>
+      <visible>true</visible>
+      <position>
+        <left>20px</left>
+        <bottom>60px</bottom>
+      </position>
+      <size>
+        <width>580px</width>
+        <height>auto</height>
+      </size>
+      <options>
+        <hideTitleBar>true</hideTitleBar>
+        <transparent>true</transparent>
+        <opacity>1</opacity>
+      </options>
+    </panel>
+    <panel id="vehicle-attitude">
+      <title>车辆姿态</title>
+      <visible>true</visible>
+      <position>
+        <left>calc(50% - 90px)</left>
+        <bottom>60px</bottom>
+      </position>
+      <size>
+        <width>180px</width>
+        <height>200px</height>
+      </size>
+      <options>
+        <hideTitleBar>true</hideTitleBar>
+        <transparent>true</transparent>
+        <opacity>1</opacity>
+      </options>
+    </panel>
+  </panels>
+</DashboardConfig>

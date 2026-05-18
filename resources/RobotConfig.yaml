@@ -1,0 +1,42 @@
+# RoboMaster 机器人配置文件
+# 注意：机器人的血量、功率、热量等属性由服务器的 RobotStaticStatus 消息提供
+# 此配置文件仅用于存储自定义数据协议路径和唯一ID映射
+
+# 车辆类型到自定义数据协议的映射
+robotTypes:
+  hero:
+    customDataProto: 'resources/CustomByteBlockConfigs/hero.proto'
+  infantry:
+    customDataProto: 'resources/CustomByteBlockConfigs/infantry.proto'
+  sentry:
+    customDataProto: 'resources/CustomByteBlockConfigs/sentry.proto'
+  engineer:
+    customDataProto: 'resources/CustomByteBlockConfigs/engineer.proto'
+  drone:
+    customDataProto: 'resources/CustomByteBlockConfigs/drone.proto'
+  balance:
+    customDataProto: 'resources/CustomByteBlockConfigs/balance.proto'
+  radar:
+    customDataProto: 'resources/CustomByteBlockConfigs/radar.proto'
+
+# 机器人选择列表（与 RoboSelect.yaml 关联）
+# 格式: 显示名称 -> { type: 类型, team: 队伍, number: 队内编号, id: 唯一ID }
+# 唯一ID规则：红队 1-99，蓝队 101-199
+# ID 由用户预先与服务器协商确定，服务器返回的 ID 必须与本地配置匹配
+robotMappings:
+  '红方1号英雄': { type: 'hero', team: 'red', number: 1, id: 1 }
+  '蓝方1号英雄': { type: 'hero', team: 'blue', number: 1, id: 101 }
+  '红方3号步兵': { type: 'infantry', team: 'red', number: 3, id: 3 }
+  '蓝方3号步兵': { type: 'infantry', team: 'blue', number: 3, id: 103 }
+  '红方4号步兵': { type: 'infantry', team: 'red', number: 4, id: 4 }
+  '蓝方4号步兵': { type: 'infantry', team: 'blue', number: 4, id: 104 }
+  '红方5号步兵': { type: 'infantry', team: 'red', number: 5, id: 5 }
+  '蓝方5号步兵': { type: 'infantry', team: 'blue', number: 5, id: 105 }
+  '红方2号工程': { type: 'engineer', team: 'red', number: 2, id: 2 }
+  '蓝方2号工程': { type: 'engineer', team: 'blue', number: 2, id: 102 }
+  '红方6号无人机': { type: 'drone', team: 'red', number: 6, id: 6 }
+  '蓝方6号无人机': { type: 'drone', team: 'blue', number: 6, id: 106 }
+  '红方7号哨兵': { type: 'sentry', team: 'red', number: 7, id: 7 }
+  '蓝方7号哨兵': { type: 'sentry', team: 'blue', number: 7, id: 107 }
+  '红方雷达站': { type: 'radar', team: 'red', number: 9, id: 9 }
+  '蓝方雷达站': { type: 'radar', team: 'blue', number: 9, id: 109 }

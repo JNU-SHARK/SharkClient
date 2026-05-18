@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package custom_data;
+
+// 图片块协议消息定义 (128字节)
+message ImageBlock {
+    fixed32 cmd_type = 1;         // 命令类型 (1B)
+    fixed32 img_id = 2;           // 图片ID (2B)
+    fixed32 block_idx = 3;        // 当前块索引 (2B)
+    fixed32 total_block = 4;      // 总块数 (2B)
+    fixed32 data_len = 5;         // 有效数据长度 (1B)
+    bytes data = 6;               // 数据块 (120B)
+}
+
+message CustomByteBlock {
+    // 哨兵自定义数据
+    uint32 patrol_route_id = 1; // 巡逻路线ID
+    bool enemy_detected = 2;    // 是否检测到敌人
+    
+    ImageBlock Image = 3;       // 图片块协议
+    bytes _padding = 4;         // 填充
+}

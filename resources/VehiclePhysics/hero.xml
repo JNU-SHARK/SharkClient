@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VehiclePhysics id="hero" name="英雄机器人">
+  <!-- 基础属性 -->
+  <Base>
+    <mass>25.0</mass> <!-- kg，更重的装甲 -->
+    <chassisSize width="0.55" height="0.20" length="0.6"/> <!-- m，更大的车体 -->
+    <description>英雄机器人，高防护高火力</description>
+  </Base>
+  
+  <!-- 电机参数 -->
+  <Motor>
+    <power>180</power> <!-- W，更强动力 -->
+    <torque>0.8</torque> <!-- Nm，更大扭矩 -->
+    <maxRPM>5000</maxRPM> <!-- 降低转速应对重量 -->
+    <powerPercent>60</powerPercent>
+  </Motor>
+  
+  <!-- 悬挂系统 -->
+  <Suspension>
+    <stiffness>35.0</stiffness> <!-- 更硬支撑重量 -->
+    <damping>3.0</damping>
+    <compression>5.5</compression>
+    <restLength>0.12</restLength>
+    <maxTravel>0.06</maxTravel>
+  </Suspension>
+  
+  <!-- 轮胎参数 -->
+  <Wheels>
+    <radius>0.08</radius> <!-- m，更大轮子 -->
+    <friction>1200.0</friction> <!-- 更高抓地力 -->
+    <rollInfluence>0.08</rollInfluence> <!-- 更稳定 -->
+  </Wheels>
+  
+  <!-- 运动阻尼 -->
+  <Damping>
+    <linear>0.25</linear> <!-- 更高阻尼应对重量 -->
+    <angular>0.6</angular>
+  </Damping>
+  
+  <!-- 控制参数 -->
+  <Control>
+    <turnSensitivity>40</turnSensitivity> <!-- 降低灵敏度 -->
+    <maxSpeed>2.5</maxSpeed> <!-- m/s，较慢 -->
+  </Control>
+  
+  <!-- 云台限制 -->
+  <Gimbal>
+    <yawMin>-180</yawMin>
+    <yawMax>180</yawMax>
+    <pitchMin>-25</pitchMin> <!-- 限制仰角 -->
+    <pitchMax>25</pitchMax>
+    <rollMin>0</rollMin>
+    <rollMax>0</rollMax>
+    <mouseSensitivity>0.0015</mouseSensitivity> <!-- 降低灵敏度 -->
+  </Gimbal>
+</VehiclePhysics>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VehiclePhysics id="infantry" name="步兵机器人">
+  <!-- 基础属性 -->
+  <Base>
+    <mass>15.0</mass> <!-- kg -->
+    <chassisSize width="0.45" height="0.15" length="0.6"/> <!-- m -->
+    <description>标准步兵机器人，平衡型配置</description>
+  </Base>
+  
+  <!-- 电机参数 -->
+  <Motor>
+    <power>120</power> <!-- W，额定功率 -->
+    <torque>0.5</torque> <!-- Nm，额定扭矩 -->
+    <maxRPM>6000</maxRPM> <!-- 最大转速 -->
+    <powerPercent>50</powerPercent> <!-- 默认功率限制 -->
+  </Motor>
+  
+  <!-- 悬挂系统 -->
+  <Suspension>
+    <stiffness>20.0</stiffness> <!-- 弹簧刚度 -->
+    <damping>2.3</damping> <!-- 阻尼系数 -->
+    <compression>4.4</compression> <!-- 压缩阻尼 -->
+    <restLength>0.1</restLength> <!-- m，自然长度 -->
+    <maxTravel>0.05</maxTravel> <!-- m，最大行程 -->
+  </Suspension>
+  
+  <!-- 轮胎参数 -->
+  <Wheels>
+    <radius>0.06</radius> <!-- m，半径 6cm -->
+    <friction>1000.0</friction> <!-- 摩擦系数 -->
+    <rollInfluence>0.1</rollInfluence> <!-- 侧翻影响 -->
+  </Wheels>
+  
+  <!-- 运动阻尼 -->
+  <Damping>
+    <linear>0.2</linear> <!-- 线性阻尼 -->
+    <angular>0.5</angular> <!-- 角阻尼 -->
+  </Damping>
+  
+  <!-- 控制参数 -->
+  <Control>
+    <turnSensitivity>50</turnSensitivity> <!-- 转向灵敏度 -->
+    <maxSpeed>3.0</maxSpeed> <!-- m/s，最大速度 -->
+  </Control>
+  
+  <!-- 云台限制 -->
+  <Gimbal>
+    <yawMin>-180</yawMin> <!-- 度 -->
+    <yawMax>180</yawMax>
+    <pitchMin>-30</pitchMin>
+    <pitchMax>30</pitchMax>
+    <rollMin>0</rollMin> <!-- 暂不使用 -->
+    <rollMax>0</rollMax>
+    <mouseSensitivity>0.002</mouseSensitivity> <!-- rad/px -->
+  </Gimbal>
+</VehiclePhysics>

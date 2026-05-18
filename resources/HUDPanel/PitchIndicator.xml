@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HUDPanel id="pitch-indicator">
+  <title>俯仰角指示器</title>
+  <description>显示云台/机体的俯仰角度，类似飞机姿态指示器</description>
+  
+  <!-- 初始位置配置 - 右侧居中 -->
+  <position>
+    <top>calc(50% - 180px)</top>
+    <right>20px</right>
+  </position>
+  
+  <!-- 初始大小配置 - 1.5倍增大 -->
+  <size>
+    <width>180px</width>
+    <height>360px</height>
+    <minWidth>120px</minWidth>
+    <minHeight>200px</minHeight>
+    <maxWidth>300px</maxWidth>
+    <maxHeight>600px</maxHeight>
+  </size>
+  
+  <!-- 功能配置 -->
+  <options>
+    <resizable>true</resizable>
+    <defaultTeam>red</defaultTeam>
+    <hideTitleBar>true</hideTitleBar>
+    <transparent>true</transparent>
+    <defaultVisible>true</defaultVisible>
+  </options>
+  
+  <!-- 显示内容配置 - 不设置width/height让组件自适应容器 -->
+  <content>
+    <component>PitchIndicator</component>
+    <props>
+      <maxPitch>30</maxPitch>
+      <minPitch>-30</minPitch>
+      <showLimits>true</showLimits>
+    </props>
+  </content>
+</HUDPanel>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HUDPanel id="video-zoom-status">
+  <title>图传倍率</title>
+  <description>显示并调整当前图传放大倍数</description>
+
+  <position>
+    <top>74px</top>
+    <right>28px</right>
+  </position>
+
+  <size>
+    <width>220px</width>
+    <height>auto</height>
+    <minWidth>200px</minWidth>
+    <minHeight>132px</minHeight>
+    <maxWidth>320px</maxWidth>
+    <maxHeight>320px</maxHeight>
+  </size>
+
+  <options>
+    <resizable>true</resizable>
+    <defaultTeam>inherit</defaultTeam>
+    <hideTitleBar>true</hideTitleBar>
+    <transparent>false</transparent>
+    <defaultVisible>true</defaultVisible>
+  </options>
+
+  <content>
+    <component>VideoZoomStatus</component>
+  </content>
+</HUDPanel>

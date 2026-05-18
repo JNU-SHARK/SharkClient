@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HUDPanel id="module-status">
+  <title>模块状态</title>
+  <description>显示相机、检测、通信、电源等模块的运行状态</description>
+  
+  <!-- 初始位置配置 -->
+  <position>
+    <bottom>26px</bottom>
+    <left>228px</left>
+  </position>
+  
+  <!-- 初始大小配置 -->
+  <size>
+    <width>320px</width>
+    <height>auto</height>
+    <minWidth>280px</minWidth>
+    <minHeight>150px</minHeight>
+    <maxWidth>450px</maxWidth>
+    <maxHeight>400px</maxHeight>
+  </size>
+  
+  <!-- 功能配置 -->
+  <options>
+    <resizable>true</resizable>
+    <defaultTeam>inherit</defaultTeam>
+    <defaultVisible>false</defaultVisible>
+  </options>
+  
+  <!-- 显示内容配置 -->
+  <content>
+    <component>ModuleStatus</component>
+    <fields>
+      <field name="camera" label="相机" type="status" />
+      <field name="detection" label="检测" type="status" toggleable="true" />
+      <field name="communication" label="通信" type="status" />
+      <field name="power" label="电源" type="percentage" />
+    </fields>
+  </content>
+</HUDPanel>

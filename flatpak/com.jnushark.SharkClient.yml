@@ -1,0 +1,41 @@
+app-id: com.jnushark.SharkClient
+runtime: org.gnome.Platform
+runtime-version: "50"
+sdk: org.gnome.Sdk
+command: sharkclient
+finish-args:
+  - --share=network
+  - --socket=x11
+  - --socket=wayland
+  - --socket=pulseaudio
+  - --device=dri
+  - --filesystem=xdg-run/pipewire-0
+  - --talk-name=org.freedesktop.Notifications
+modules:
+  - name: sharkclient
+    buildsystem: simple
+    sources:
+      - type: archive
+        path: ../build-lite/SharkClient-Linux-Ubuntu22.04.tar.gz
+      - type: file
+        path: com.jnushark.SharkClient.desktop
+      - type: file
+        path: ../src-tauri/icons/128x128.png
+        dest-filename: com.jnushark.SharkClient.png
+    build-commands:
+      - mkdir -p /app/SharkClient /app/bin /app/share/applications /app/share/metainfo /app/share/icons/hicolor/128x128/apps
+      - cp -a "AI Server" Cache README.txt resources run.sh scripts install-env.sh SharkClientRustVersion /app/SharkClient/
+      - chmod +x /app/SharkClient/SharkClientRustVersion /app/SharkClient/run.sh /app/SharkClient/install-env.sh /app/SharkClient/scripts/install-lite-env.sh
+      - install -Dm644 com.jnushark.SharkClient.desktop /app/share/applications/com.jnushark.SharkClient.desktop
+      - install -Dm644 com.jnushark.SharkClient.png /app/share/icons/hicolor/128x128/apps/com.jnushark.SharkClient.png
+      - |
+        cat > /app/bin/sharkclient <<'EOF'
+        #!/usr/bin/env bash
+        set -euo pipefail
+        export SHARK_CACHE_DIR="${XDG_DATA_HOME:-$HOME/.var/app/com.jnushark.SharkClient/data}/Cache"
+        export TMPDIR="${XDG_CACHE_HOME:-$HOME/.var/app/com.jnushark.SharkClient/cache}/tmp"
+        mkdir -p "$SHARK_CACHE_DIR" "$TMPDIR"
+        cd /app/SharkClient
+        exec /app/SharkClient/SharkClientRustVersion "$@"
+        EOF
+      - chmod +x /app/bin/sharkclient

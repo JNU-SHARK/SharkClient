@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HUDPanel id="vehicle-attitude">
+  <title>车辆姿态</title>
+  <description>显示底盘和云台的实时姿态角度</description>
+  
+  <!-- 初始位置配置 - 底部居中（使用 calc 计算） -->
+  <position>
+    <bottom>60px</bottom>
+    <left>calc(50% - 90px)</left>
+  </position>
+  
+  <!-- 初始大小配置 -->
+  <size>
+    <width>180px</width>
+    <height>200px</height>
+    <minWidth>140px</minWidth>
+    <minHeight>160px</minHeight>
+    <maxWidth>280px</maxWidth>
+    <maxHeight>320px</maxHeight>
+  </size>
+  
+  <!-- 功能配置 -->
+  <options>
+    <resizable>true</resizable>
+    <defaultTeam>red</defaultTeam>
+    <hideTitleBar>true</hideTitleBar>
+    <transparent>true</transparent>
+    <defaultVisible>true</defaultVisible>
+  </options>
+  
+  <!-- 显示内容配置 -->
+  <content>
+    <component>VehicleAttitude</component>
+    <props>
+      <size>130</size>
+    </props>
+  </content>
+</HUDPanel>

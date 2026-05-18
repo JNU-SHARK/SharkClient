@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HUDPanel id="weapon-status">
+  <title>武器状态</title>
+  <description>显示枪口热量和剩余弹量</description>
+  
+  <!-- 初始位置配置 - 屏幕中心偏右（热量环右侧） -->
+  <position>
+    <top>calc(50% - 50px)</top>
+    <left>calc(50% + 80px)</left>
+  </position>
+  
+  <!-- 初始大小配置 -->
+  <size>
+    <width>180px</width>
+    <height>100px</height>
+    <minWidth>160px</minWidth>
+    <minHeight>80px</minHeight>
+    <maxWidth>300px</maxWidth>
+    <maxHeight>160px</maxHeight>
+  </size>
+  
+  <!-- 功能配置 -->
+  <options>
+    <resizable>true</resizable>
+    <defaultTeam>inherit</defaultTeam>
+    <hideTitleBar>true</hideTitleBar>
+    <transparent>true</transparent>
+    <defaultVisible>true</defaultVisible>
+  </options>
+  
+  <!-- 显示内容配置 -->
+  <content>
+    <component>WeaponStatus</component>
+    <props>
+      <compact>false</compact>
+      <maxAmmo>500</maxAmmo>
+    </props>
+  </content>
+</HUDPanel>
