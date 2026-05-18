@@ -1,0 +1,359 @@
+syntax = "proto3";
+package robomaster;
+
+// RoboMaster 2026 自定义客户端通信协议
+// 协议版本: robomaster.proto (最新)
+// 说明: 所有消息统一在 robomaster 包下，通过消息名分类方向 (见 js/mqtt-server*.js)
+
+// ======== 客户端 -> 服务器 (上行消息) ========
+
+// 2.2.1 KeyboardMouseControl (原 RemoteControl 拆分)
+// 用途: 传输鼠标键盘输入 (频率: 75Hz)
+message KeyboardMouseControl {
+    int32 mouse_x = 1;                 // 鼠标 x 轴移动速度,负值向左
+    int32 mouse_y = 2;                 // 鼠标 y 轴移动速度,负值向下
+    int32 mouse_z = 3;                 // 鼠标滚轮速度,负值向后滚
+    bool left_button_down = 4;         // 左键是否按下
+    bool right_button_down = 5;        // 右键是否按下
+    uint32 keyboard_value = 6;         // 键盘按键位掩码
+    bool mid_button_down = 7;          // 中键是否按下
+}
+
+// 2.2.2 CustomControl (原 RemoteControl 拆分)
+// 用途: 传输自定义控制数据
+message CustomControl {
+    bytes data = 1;                    // 最大30字节的自定义数据
+}
+
+// 小地图交互指令(目标点)
+message MapClickInfo {
+    float target_x = 1;
+    float target_y = 2;
+    float target_z = 3;
+}
+
+// 2.2.17 MapClickInfoNotify
+// 用途: 云台手地图点击标记 (触发式)
+message MapClickInfoNotify {
+    uint32 is_send_all = 1;            // 发送范围(0=指定客户端,1=除哨兵,2=包含哨兵)
+    bytes robot_id = 2;                // 目标机器人 ID 列表(固定7字节)
+    uint32 mode = 3;                   // 标记模式(1=地图,2=对方机器人)
+    uint32 enemy_id = 4;               // 标定的对方 ID
+    uint32 ascii = 5;                  // 自定义图标 ASCII 码
+    uint32 type = 6;                   // 标记类型(1=攻击,2=防御,3=警戒,4=自定义)
+    float map_x = 7;                   // 地图坐标 X
+    float map_y = 8;                   // 地图坐标 Y
+}
+
+// 2.2.20 AssemblyCommand
+// 用途: 工程装配指令 (频率: 1Hz)
+message AssemblyCommand {
+    uint32 operation = 1;              // 装配操作(1=确认,2=取消)
+    uint32 difficulty = 2;             // 选中的装配难度
+}
+
+// 2.2.22 RobotPerformanceSelectionCommand
+// 用途: 步兵/英雄选择性能体系 (频率: 1Hz)
+message RobotPerformanceSelectionCommand {
+    uint32 shooter = 1;                // 发射机构性能体系
+    uint32 chassis = 2;                // 底盘性能体系
+    uint32 sentry_control = 3;         // 哨兵控制体系
+}
+
+// 2.2.24 CommonCommand
+// 用途: 通用指令
+message CommonCommand {
+    uint32 cmd_type = 1;
+    uint32 param = 2;
+}
+
+// 2.2.25 HeroDeployModeEventCommand
+// 用途: 英雄部署模式指令 (频率: 1Hz)
+message HeroDeployModeEventCommand {
+    uint32 mode = 1;                   // 模式(0=退出,1=进入)
+}
+
+// 2.2.27 RuneActivateCommand
+// 用途: 能量机关激活指令 (频率: 1Hz)
+message RuneActivateCommand {
+    uint32 activate = 1;               // 激活(1=开启)
+}
+
+// 2.2.30 DartCommand
+// 用途: 飞镖控制指令 (频率: 1Hz)
+message DartCommand {
+    uint32 target_id = 1;              // 目标ID(1=前哨站,2=基地固定,3=基地随机固定,4=基地随机移动,5=基地末端移动)
+    bool open = 2;                     // 闸门开关
+    bool launch_confirm = 3;           // 发射确认
+}
+
+// 2.2.32 SentryCtrlCommand (原 GuardCtrlCommand)
+// 用途: 哨兵控制指令请求 (频率: 1Hz)
+message SentryCtrlCommand {
+    uint32 command_id = 1;             // 指令编号
+}
+
+// 2.2.34 AirSupportCommand
+// 用途: 空中支援指令 (频率: 1Hz)
+message AirSupportCommand {
+    uint32 command_id = 1;             // 指令类型(1=免费,2=付费,3=中断)
+}
+
+// ======== 服务器 -> 客户端 (下行消息) ========
+
+// 2.2.3 GameStatus
+// 用途: 同步比赛全局状态信息 (频率: 5Hz)
+message GameStatus {
+    uint32 current_round = 1;          // 当前局号(从1开始)
+    uint32 total_rounds = 2;           // 总局数
+    uint32 red_score = 3;              // 红方得分
+    uint32 blue_score = 4;             // 蓝方得分
+    uint32 current_stage = 5;          // 当前阶段(0-5)
+    int32 stage_countdown_sec = 6;     // 当前阶段剩余时间(秒)
+    int32 stage_elapsed_sec = 7;       // 当前阶段已过时间(秒)
+    bool is_paused = 8;                // 是否暂停
+}
+
+// 2.2.4 GlobalUnitStatus
+// 用途: 同步基地、前哨站和所有机器人状态 (频率: 1Hz)
+message GlobalUnitStatus {
+    uint32 base_health = 1;            // 己方基地当前血量
+    uint32 base_status = 2;            // 己方基地状态
+    uint32 base_shield = 3;            // 己方基地当前护盾值
+    uint32 outpost_health = 4;         // 己方前哨站当前血量
+    uint32 outpost_status = 5;         // 己方前哨站状态
+    uint32 enemy_base_health = 6;      // 对方基地当前血量
+    uint32 enemy_base_status = 7;      // 对方基地状态
+    uint32 enemy_base_shield = 8;      // 对方基地当前护盾值
+    uint32 enemy_outpost_health = 9;   // 对方前哨站当前血量
+    uint32 enemy_outpost_status = 10;  // 对方前哨站状态
+    repeated uint32 robot_health = 11; // 所有机器人血量(先己方后对方)
+    repeated int32 robot_bullets = 12; // 己方机器人剩余累计发弹量
+    uint32 total_damage_ally = 13;     // 己方累计总伤害
+    uint32 total_damage_enemy = 14;    // 对方累计总伤害
+}
+
+// 2.2.5 GlobalLogisticsStatus
+// 用途: 同步全局后勤信息 (频率: 1Hz)
+message GlobalLogisticsStatus {
+    uint32 remaining_economy = 1;      // 己方当前经济
+    uint64 total_economy_obtained = 2; // 己方累计总经济
+    uint32 tech_level = 3;             // 己方科技等级
+    uint32 encryption_level = 4;       // 己方加密等级
+}
+
+// 2.2.6 GlobalSpecialMechanism
+// 用途: 同步正在生效的全局特殊机制 (频率: 1Hz)
+message GlobalSpecialMechanism {
+    repeated uint32 mechanism_id = 1;
+    repeated int32 mechanism_time_sec = 2;
+}
+
+// 2.2.7 Event
+// 用途: 全局事件通知 (触发式)
+message Event {
+    int32 event_id = 1;
+    string param = 2;
+}
+
+// 2.2.8 RobotInjuryStat
+// 用途: 机器人一次存活期间累计受伤统计 (频率: 1Hz)
+message RobotInjuryStat {
+    uint32 total_damage = 1;
+    uint32 collision_damage = 2;
+    uint32 small_projectile_damage = 3;
+    uint32 large_projectile_damage = 4;
+    uint32 dart_splash_damage = 5;
+    uint32 module_offline_damage = 6;
+    uint32 offline_damage = 7;         // 离线扣血(原 wifi_offline_damage)
+    uint32 penalty_damage = 8;
+    uint32 server_kill_damage = 9;
+    uint32 killer_id = 10;
+}
+
+// 2.2.9 RobotRespawnStatus
+// 用途: 机器人复活状态同步 (频率: 1Hz)
+message RobotRespawnStatus {
+    bool is_pending_respawn = 1;
+    uint32 total_respawn_progress = 2;
+    uint32 current_respawn_progress = 3;
+    bool can_free_respawn = 4;
+    uint32 gold_cost_for_respawn = 5;
+    bool can_pay_for_respawn = 6;
+}
+
+// 2.2.10 RobotStaticStatus
+// 用途: 机器人固定属性和配置 (频率: 1Hz)
+message RobotStaticStatus {
+    uint32 connection_state = 1;
+    uint32 field_state = 2;
+    uint32 alive_state = 3;
+    uint32 robot_id = 4;
+    uint32 robot_type = 5;
+    uint32 performance_system_shooter = 6;
+    uint32 performance_system_chassis = 7;
+    uint32 level = 8;
+    uint32 max_health = 9;
+    uint32 max_heat = 10;
+    float heat_cooldown_rate = 11;
+    uint32 max_power = 12;
+    uint32 max_buffer_energy = 13;
+    uint32 max_chassis_energy = 14;
+}
+
+// 2.2.11 RobotDynamicStatus
+// 用途: 机器人实时数据 (频率: 10Hz)
+message RobotDynamicStatus {
+    uint32 current_health = 1;
+    float current_heat = 2;
+    float last_projectile_fire_rate = 3;
+    uint32 current_chassis_energy = 4;
+    uint32 current_buffer_energy = 5;
+    uint32 current_experience = 6;
+    uint32 experience_for_upgrade = 7;
+    uint32 total_projectiles_fired = 8;
+    uint32 remaining_ammo = 9;
+    bool is_out_of_combat = 10;
+    uint32 out_of_combat_countdown = 11;
+    bool can_remote_heal = 12;
+    bool can_remote_ammo = 13;
+}
+
+// 2.2.12 RobotModuleStatus
+// 用途: 机器人各模块运行状态 (频率: 1Hz)
+message RobotModuleStatus {
+    uint32 power_manager = 1;
+    uint32 rfid = 2;
+    uint32 light_strip = 3;
+    uint32 small_shooter = 4;
+    uint32 big_shooter = 5;
+    uint32 uwb = 6;
+    uint32 armor = 7;
+    uint32 video_transmission = 8;
+    uint32 capacitor = 9;
+    uint32 main_controller = 10;
+    uint32 laser_detection_module = 11;
+}
+
+// 2.2.13 RobotPosition
+// 用途: 机器人空间坐标和朝向 (频率: 1Hz)
+message RobotPosition {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+    float yaw = 4;                     // 单位: 度,正北为 0 度
+    uint32 robot_id = 5;
+}
+
+// 2.2.14 Buff
+// 用途: Buff 效果信息
+message Buff {
+    uint32 robot_id = 1;
+    uint32 buff_type = 2;
+    int32 buff_level = 3;
+    uint32 buff_max_time = 4;
+    uint32 buff_left_time = 5;
+}
+
+// 2.2.15 PenaltyInfo
+// 用途: 判罚信息同步 (触发式)
+message PenaltyInfo {
+    uint32 penalty_type = 1;
+    uint32 penalty_effect_sec = 2;
+    uint32 total_penalty_num = 3;
+}
+
+// 2.2.16 RobotPathPlanInfo
+// 用途: 哨兵轨迹规划信息 (频率: 1Hz)
+message RobotPathPlanInfo {
+    uint32 intention = 1;
+    uint32 start_pos_x = 2;
+    uint32 start_pos_y = 3;
+    repeated int32 offset_x = 4;
+    repeated int32 offset_y = 5;
+    uint32 sender_id = 6;
+}
+
+// 2.2.18 RadarInfoToClient (原 RaderInfoToClient 修正拼写)
+// 用途: 雷达发送的机器人位置信息 (频率: 1Hz)
+message RadarInfoToClient {
+    repeated RadarSingleRobotInfo RadarSingleRobotInfo = 1;
+}
+
+message RadarSingleRobotInfo {
+    uint32 target_pos_x = 1;
+    uint32 target_pos_y = 2;
+    uint32 is_high_light = 3;
+}
+
+// 2.2.19 CustomByteBlock
+// 用途: 机器人自定义上传数据流 (频率: 50Hz)
+message CustomByteBlock {
+    bytes data = 1;                    // 最大 1.2 kbit 自定义数据包
+}
+
+// 2.2.21 TechCoreMotionStateSync
+// 用途: 科技核心运动状态同步 (频率: 1Hz)
+message TechCoreMotionStateSync {
+    uint32 maximum_difficulty_level = 1; // 当前可选择的最高装配难度等级
+    uint32 basic_state = 2;             // 基础状态
+    uint32 putin_state = 3;             // 进入状态
+    uint32 move_state = 4;              // 移动状态
+    uint32 rotate_state = 5;            // 旋转状态
+    uint32 enemy_core_status = 6;       // 对方科技核心状态
+    uint32 remain_time_all = 7;         // 总剩余时间
+    uint32 remain_time_step = 8;        // 阶段剩余时间
+}
+
+// 2.2.23 RobotPerformanceSelectionSync
+// 用途: 性能体系状态同步 (频率: 1Hz)
+message RobotPerformanceSelectionSync {
+    uint32 shooter = 1;
+    uint32 chassis = 2;
+    uint32 sentry_control = 3;
+}
+
+// 2.2.26 DeployModeStatusSync
+// 用途: 英雄部署模式状态同步 (频率: 1Hz)
+message DeployModeStatusSync {
+    uint32 status = 1;                 // 0=未部署,1=已部署
+}
+
+// 2.2.28 RuneStatusSync
+// 用途: 能量机关状态同步 (频率: 1Hz)
+message RuneStatusSync {
+    uint32 rune_status = 1;            // 1=未激活,2=正在激活,3=已激活
+    uint32 activated_arms = 2;         // 当前已激活的灯臂数量
+    float average_rings = 3;           // 平均环数
+}
+
+// 2.2.29 SentryStatusSync (原 SentinelStatusSync)
+// 用途: 哨兵姿态和弱化状态 (频率: 1Hz)
+message SentryStatusSync {
+    uint32 posture_id = 1;             // 1=进攻,2=防御,3=移动
+    bool is_weakened = 2;              // 是否弱化
+}
+
+// 2.2.31 DartSelectTargetStatusSync
+// 用途: 飞镖目标选择状态同步 (频率: 1Hz)
+message DartSelectTargetStatusSync {
+    uint32 target_id = 1;
+    uint32 open = 2;                   // 闸门状态(0=关,1=开)
+}
+
+// 2.2.33 SentryCtrlResult (原 GuardCtrlResult)
+// 用途: 哨兵控制指令结果反馈 (频率: 1Hz)
+message SentryCtrlResult {
+    uint32 command_id = 1;
+    uint32 result_code = 2;            // 0=成功,其他=失败
+}
+
+// 2.2.35 AirSupportStatusSync
+// 用途: 空中支援状态反馈 (频率: 1Hz)
+message AirSupportStatusSync {
+    uint32 airsupport_status = 1;      // 0=未进行,1=进行中,2=被锁定
+    uint32 left_time = 2;              // 免费剩余时间
+    uint32 cost_coins = 3;             // 付费已花费金币
+    uint32 is_being_targeted = 4;      // 是否被瞄准
+    uint32 shooter_status = 5;         // 发射器状态
+}
