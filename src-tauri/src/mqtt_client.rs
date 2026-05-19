@@ -135,7 +135,7 @@ fn emit_mqtt_message_batch(app: &AppHandle, pending_messages: &mut Vec<MqttMessa
         return;
     }
 
-    let batch: Vec<MqttMessagePayload> = pending_messages.drain(..).collect();
+    let batch = std::mem::take(pending_messages);
     let _ = app.emit("mqtt-message-batch", batch);
 }
 
