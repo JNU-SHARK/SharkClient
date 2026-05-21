@@ -388,10 +388,7 @@ HUD 组件由 XML + Vue 双层定义；在 `resources/CustomElement/` 与 `resou
 
 ## 许可证
 
-正式发布前请补充 `LICENSE` 文件。推荐选项：
-
-- **MIT / Apache-2.0**：宽松许可，便于二次集成与商业化。
-- **GPL-3.0**：要求衍生作品同样开源，适合教育与社区共享场景。
+- **GPL-3.0**
 
 `src-tauri/vendor/libde265/` 为 vendored 第三方源码，请遵循其原始许可证（libde265 默认 LGPLv3）。
 
